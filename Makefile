@@ -6,7 +6,7 @@ OBJ     := $(SRC:%.cpp=$(OBJDIR)/%.o)
 
 CC      := g++
 CFLAGS  := -I$(SRCDIR) -std=c++11 -pedantic -Wall -Wextra -Wshadow -Wwrite-strings -O2
-LDFLAGS := -lsfml-graphics -lsfml-window -lsfml-system -lGL
+LDFLAGS := -lsfml-graphics -lsfml-window -lsfml-system -framework OpenGL
 
 # Demo
 $(TARGET): demo/demo.cpp lib/libsfml-widgets.a
@@ -18,7 +18,7 @@ $(TARGET): demo/demo.cpp lib/libsfml-widgets.a
 lib/libsfml-widgets.a: $(OBJ)
 	@mkdir -p lib
 	@echo "\033[1;33mlinking library\033[0m $@"
-	@ar crvf $@ $(OBJ)
+	@ar crv $@ $(OBJ)
 
 # Library objects
 $(OBJDIR)/%.o: %.cpp
