@@ -6,7 +6,13 @@ OBJ     := $(SRC:%.cpp=$(OBJDIR)/%.o)
 
 CC      := g++
 CFLAGS  := -I$(SRCDIR) -std=c++11 -pedantic -Wall -Wextra -Wshadow -Wwrite-strings -O2
-LDFLAGS := -lsfml-graphics -lsfml-window -lsfml-system -framework OpenGL
+
+# Check if we are on Linux or MacOS
+ifeq ($(shell uname -s), Linux)
+	LDFLAGS := -lsfml-graphics -lsfml-window -lsfml-system -lGL
+else
+	LDFLAGS := -lsfml-graphics -lsfml-window -lsfml-system -framework OpenGL
+endif
 
 # Demo
 $(TARGET): demo/demo.cpp lib/libsfml-widgets.a
